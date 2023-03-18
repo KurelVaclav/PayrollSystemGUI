@@ -78,6 +78,13 @@ public class InputFrame extends javax.swing.JFrame {
         btnEmplsSaveAddedEmpl = new javax.swing.JButton();
         jLabelErrorMessageAddEmpl = new javax.swing.JLabel();
         WageMenuPanel = new javax.swing.JPanel();
+        jTextFieldWageFilePath = new javax.swing.JTextField();
+        jLabelWageFileWhours = new javax.swing.JLabel();
+        jLabelWageEnterFileMessage = new javax.swing.JLabel();
+        jButtonWageMakeNewFile = new javax.swing.JButton();
+        WageTextArea = new java.awt.TextArea();
+        jButtonWageShowHours = new javax.swing.JButton();
+        jButtonWageCalculateWage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Payroll app");
@@ -85,11 +92,6 @@ public class InputFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Enter file with employees");
 
-        tfEnterFileEmpl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEnterFileEmplActionPerformed(evt);
-            }
-        });
         tfEnterFileEmpl.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfEnterFileEmplKeyPressed(evt);
@@ -401,15 +403,81 @@ public class InputFrame extends javax.swing.JFrame {
 
         jTabbedPaneEW.addTab("Employee Menu", EmplMenuPanel);
 
+        jTextFieldWageFilePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldWageFilePathActionPerformed(evt);
+            }
+        });
+        jTextFieldWageFilePath.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldWageFilePathKeyPressed(evt);
+            }
+        });
+
+        jLabelWageFileWhours.setText("Enter file of working hours (Employee ID _ work hours)");
+
+        jButtonWageMakeNewFile.setText("MakeNewFile");
+        jButtonWageMakeNewFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWageMakeNewFileActionPerformed(evt);
+            }
+        });
+
+        jButtonWageShowHours.setText("ShowHours");
+        jButtonWageShowHours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWageShowHoursActionPerformed(evt);
+            }
+        });
+
+        jButtonWageCalculateWage.setText("CalculateWage");
+        jButtonWageCalculateWage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWageCalculateWageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout WageMenuPanelLayout = new javax.swing.GroupLayout(WageMenuPanel);
         WageMenuPanel.setLayout(WageMenuPanelLayout);
         WageMenuPanelLayout.setHorizontalGroup(
             WageMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(WageMenuPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(WageMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(WageMenuPanelLayout.createSequentialGroup()
+                        .addGroup(WageMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonWageShowHours, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonWageCalculateWage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(WageTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE))
+                    .addGroup(WageMenuPanelLayout.createSequentialGroup()
+                        .addGroup(WageMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelWageFileWhours)
+                            .addComponent(jTextFieldWageFilePath)
+                            .addComponent(jLabelWageEnterFileMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addComponent(jButtonWageMakeNewFile)))
+                .addGap(23, 23, 23))
         );
         WageMenuPanelLayout.setVerticalGroup(
             WageMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(WageMenuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelWageFileWhours)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldWageFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(WageMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelWageEnterFileMessage)
+                    .addComponent(jButtonWageMakeNewFile))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(WageMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(WageTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(WageMenuPanelLayout.createSequentialGroup()
+                        .addComponent(jButtonWageShowHours, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonWageCalculateWage, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPaneEW.addTab("Wage Menu", WageMenuPanel);
@@ -435,7 +503,7 @@ public class InputFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    protected String employeeFileName() throws Exception {
+    private String employeeFileName() throws Exception {
         String employeeFile = tfEnterFileEmpl.getText();
         boolean checksuffix = employeeFile.endsWith(".txt") || employeeFile.endsWith(".dat");
         if (checksuffix) {
@@ -458,6 +526,8 @@ public class InputFrame extends javax.swing.JFrame {
                 lbMakeFileMessage.setText("Wrong file format - must be .txt or .dat");
                 ex.getStackTrace();
             }
+            boolean makingDir = Writer.dataDirectory.mkdir();
+            if(makingDir) lbMakeFileMessage.setText("New directory has been created, press enter to continue");
             File file = new File(Writer.dataDirectory, employeeFile);
             if (file.exists()) {
                 try {
@@ -471,10 +541,6 @@ public class InputFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tfEnterFileEmplKeyPressed
-
-    private void tfEnterFileEmplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEnterFileEmplActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEnterFileEmplActionPerformed
 
     private void btnMakeNewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeNewFileActionPerformed
         String employeeFile = null;
@@ -609,6 +675,85 @@ public class InputFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnFindEmplByIDActionPerformed
 
+    private String wageFileName() throws Exception {
+        String wageFile = jTextFieldWageFilePath.getText();
+        boolean checksuffix = wageFile.endsWith(".txt") || wageFile.endsWith(".dat");
+        if (checksuffix) {
+            return wageFile;
+        } else {
+            Exception IllegalInputFromUser = new Exception();
+            throw IllegalInputFromUser;
+        }
+    }
+
+    private void jTextFieldWageFilePathKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldWageFilePathKeyPressed
+        String wageFile = null;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                wageFile = wageFileName();
+                jLabelWageEnterFileMessage.setText("File have been found...");
+            } catch (NullPointerException npe) {
+                jLabelWageEnterFileMessage.setText("Employees file not found or is empty");
+            } catch (Exception ex) {
+                jLabelWageEnterFileMessage.setText("Wrong file format - must be .txt or .dat");
+                ex.getStackTrace();
+            }
+            File file = new File(Writer.dataDirectory, wageFile);
+            file.mkdir();
+            if (file.exists()) {
+                try {
+                    pay.loadHours(wageFile);
+                    jLabelWageEnterFileMessage.setText("File have been loaded");
+                } catch (NoSuchElementException e) {
+                    jLabelWageEnterFileMessage.setText("The Employee ID could nor be found");
+                } catch (IOException ex) {
+                    jLabelWageEnterFileMessage.setText("Parsing hours failed");
+                }
+            } else {
+                jLabelWageEnterFileMessage.setText("This file does not exist. Press MakeNewFile to create a new file");
+            }
+        }
+    }//GEN-LAST:event_jTextFieldWageFilePathKeyPressed
+
+    private void jButtonWageMakeNewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWageMakeNewFileActionPerformed
+        String wageFile = null;
+        try {
+            wageFile = wageFileName();
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        }
+        File file = new File(Writer.dataDirectory, wageFile);
+        file.mkdir();
+        jLabelWageEnterFileMessage.setText("Making new dir");
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+                jLabelWageEnterFileMessage.setText("New file has been made.");
+            } else {
+                jLabelWageEnterFileMessage.setText("This file already exists");
+            }
+        } catch (IOException ex) {
+            jLabelWageEnterFileMessage.setText("Creating new file failed!!!");
+        }
+    }//GEN-LAST:event_jButtonWageMakeNewFileActionPerformed
+
+    private void jButtonWageShowHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWageShowHoursActionPerformed
+        String wageInfo = pay.getHoursInfo();
+        wageInfo.split("[\n]");
+        WageTextArea.setText(wageInfo);
+    }//GEN-LAST:event_jButtonWageShowHoursActionPerformed
+
+    private void jButtonWageCalculateWageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWageCalculateWageActionPerformed
+        pay.calculateWages();
+        String wageInfo = pay.getWagesInfo();
+        wageInfo.split("[\n]");
+        WageTextArea.setText(wageInfo);
+    }//GEN-LAST:event_jButtonWageCalculateWageActionPerformed
+
+    private void jTextFieldWageFilePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWageFilePathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldWageFilePathActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -648,6 +793,7 @@ public class InputFrame extends javax.swing.JFrame {
     private javax.swing.JPanel EmplMenuPanel;
     private java.awt.TextArea EmployeeTextArea;
     private javax.swing.JPanel WageMenuPanel;
+    private java.awt.TextArea WageTextArea;
     private javax.swing.JButton btnAddEmpl;
     private javax.swing.JButton btnEmplShowBeforeAdd;
     private javax.swing.JButton btnEmplsSaveAddedEmpl;
@@ -657,9 +803,14 @@ public class InputFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnFindEmplByID;
     private javax.swing.JButton btnMakeNewFile;
     private javax.swing.JButton btnShowEmpls;
+    private javax.swing.JButton jButtonWageCalculateWage;
+    private javax.swing.JButton jButtonWageMakeNewFile;
+    private javax.swing.JButton jButtonWageShowHours;
     private javax.swing.JLabel jLabelEmplsSorting;
     private static javax.swing.JLabel jLabelErrorMessageAddEmpl;
     private javax.swing.JLabel jLabelSearchForID;
+    private static javax.swing.JLabel jLabelWageEnterFileMessage;
+    private javax.swing.JLabel jLabelWageFileWhours;
     private javax.swing.JLabel jLabeleDateOfBirth;
     private javax.swing.JLabel jLabeleHourTax;
     private javax.swing.JLabel jLabeleID;
@@ -676,6 +827,7 @@ public class InputFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPaneEW;
     private static javax.swing.JTextField jTextFieldEmplSearchForID;
+    private javax.swing.JTextField jTextFieldWageFilePath;
     private static javax.swing.JTextField jTextFieldeHourTax;
     private static javax.swing.JTextField jTextFieldeID;
     private static javax.swing.JTextField jTextFieldeLastName;
