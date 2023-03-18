@@ -1,0 +1,17 @@
+1    Vaclav              Kurel               21 05 1997  CZ    250,00  IT-spravce          
+2    Tomas               Novak               05 06 1990  CZ    150,00  mistr               
+3    Jan                 Jon                 25 11 1980  UK    100,00  delnik              
+4    Sam                 Kam                 16 11 1993  EN    270,00  vedouci-marketing   
+5    Lukas               Huk                 04 08 1978  CZ    200,00  ucetni              
+6    Pavel               Chudy               01 01 1992  CZ    200,00  dispecer            
+7    Alzbeta             Dvorakova           28 06 1991  CZ    250,00  mzdova-ucetni       
+8    Viktor              Viking              05 06 1987  UK    100,00  delnik              
+9    Josef               Fifan               02 02 1977  SK    150,00  delnik_mistr        
+10   Vit                 Rom                 06 02 1975  CZ    100,00  kuchar              
+11   Jan                 Kendik              27 04 1999  CZ    400,00  uklizec             
+13   Vladislav           Sames               06 08 1979  CZ    150,00  delnik_kov          
+20   Petr                Pan                 03 03 1986  US    100,00  uklizec             
+22   Jan                 Novak               10 10 1999  CZ    150,00  ohranka_brana       
+23   V                   K                   05 05 1990  CZ    200,00  delnik_mist         
+30   John                Fom                 04 06 1975  US    200,00  delnik_plast        
+40   Thomas              New                 06 09 1990  EN    200,00  delnik_soustruh     
