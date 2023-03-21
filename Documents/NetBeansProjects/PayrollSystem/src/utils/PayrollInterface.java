@@ -13,7 +13,7 @@ public interface PayrollInterface {
     
     
     /**
-     * Metoda pro načtení zaměstnanců ze souboru
+     * Method to load employees from file
      *
      * @param employeeFile
      * @throws FileNotFoundException
@@ -23,14 +23,14 @@ public interface PayrollInterface {
     public void loadEmployees(String employeeFile) throws /**FileNotFoundException,**/ IOException;
 
     /**
-     * Metoda pro získání informace o zaměstnancích
+     * Method to obtaining info about employees
      *
      * @return String
      */
     public String getEmployeesInfo();
 
     /**
-     * Metoda pro nalezení zaměstnance dle ID
+     * Method for finding employee by ID
      *
      * @param id
      * @return
@@ -38,14 +38,14 @@ public interface PayrollInterface {
     public Employee findEmployee(int id);
 
     /**
-     * Metoda pro přidání zaměstnance do listu
+     * Method to adding employee to list
      *
      * @param e - Employee
      */
     public void addEmployeeToList(Employee e);
 
     /**
-     * Metoda pro uložení přidaného zaměstnance
+     * Method to save the added employee
      *
      * @param employeeFile
      * @throws IOException
@@ -53,28 +53,28 @@ public interface PayrollInterface {
     public void saveAddedEmployees(String employeeFile) throws IOException;
 
     /**
-     * Metoda pro výpis zaměstnanců seřazených dle ID
+     * Method for obtaining information about employees sorted by ID
      *
      * @return String
      */
     public String getEmployeesInfoSortedByID();
 
     /**
-     * Metoda pro výpis zaměstnanců seřazených dle příjmení
+     * Method for obtaining information about employees sorted by last name
      *
      * @return String
      */
     public String getEmployeesInfoSortedByLastName();
 
     /**
-     * Metoda pro výpis zaměstnanců seřazených dle jména
+     * Method for obtaining information about employees sorted by first name
      *
      * @return String
      */
     public String getEmployeesInfoSortedByFirstName();
 
     /**
-     * Metoda pro naštení odpracovaných hodin zaměstnance
+     * Method for loading working hours by file type
      *
      * @param wagesFile
      * @throws FileNotFoundException
@@ -83,7 +83,7 @@ public interface PayrollInterface {
     public void loadHours(String wagesFile) throws FileNotFoundException, IOException;
 
     /**
-     * Metoda pro uložení přidané odpracované hodiny
+     * Method for saving added working hours
      *
      * @param wagesFile
      * @throws IOException
@@ -91,26 +91,26 @@ public interface PayrollInterface {
     public void saveAddedHours(String wagesFile) throws IOException;
 
     /**
-     * Metoda pro získání informace o odpracovaných hodinách zaměstnance
+     * Method for obtainig info about employee's working hours
      *
      * @return String
      */
     public String getHoursInfo();
 
     /**
-     * Metoda pro výpočet mezd
+     * Method for calculating wages
      */
     public void calculateWages();
 
     /**
-     * Metoda pro získání informace o mzdě zaměstnance
+     * Method for obtaining info about calculated wages
      *
      * @return String
      */
     public String getWagesInfo();
 
     /**
-     * Metoda pro uložení mezd
+     * Method to save calculated wages
      *
      * @param resultFile
      * @throws IOException
@@ -118,14 +118,14 @@ public interface PayrollInterface {
     public void saveWages(String resultFile) throws IOException;
 
     /**
-     * Metoda pro přidání mzdy zaměstnance do listu
+     * Method to add wage to list
      *
      * @param wage
      */
     public void addWageToList(Wage wage);
 
     /**
-     * Metoda pro uložení mezd do Excelu
+     * Method for saving results to Excel file
      *
      * @param resultFile
      * @throws IOException

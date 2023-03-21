@@ -1,13 +1,13 @@
 package app;
 
 /**
- * Třída reprezentující pracovní pozici zaměstnance a jeho taxu ve firmě 
- * data: hourTax = hodinová sazba, název pozice
+ * Class representing the work (job) position of the employee and his hour tax in the
+ * company. Data: hourTax, positionName
  *
  * @author Václav Kurel
  */
 public class Tax {
-    
+
     //data
     private double hourTax;
     private String positionName;
@@ -26,7 +26,7 @@ public class Tax {
     }
 
     public String getTaxesToString() {
-        return String.format("%-8.2f%-20s", hourTax, positionName);
+        return String.format("%-15.2f%-20s", hourTax, positionName);
     }
 
     @Override

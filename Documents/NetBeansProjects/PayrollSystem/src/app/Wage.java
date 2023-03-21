@@ -3,9 +3,9 @@ package app;
 import java.util.Comparator;
 
 /**
- * Třída reprezentující vypočtenou mzdu změstnanci data: zaměstnance, hrubá
- * mzda, super hrubí mzda, záloha na daň, odvody na sociální a zdravotní
- * pojištění, čistá mzda
+ * Class representing the calculated employee's wages. Data: employee, gross
+ * salary, advance tax, social and health insurance payment/contributions, net,
+ * wage
  *
  * @author Václav Kurel
  */
@@ -15,15 +15,15 @@ public class Wage {
     private Employee employee;
     private int hours;
     private double grossWage; //hrubá mzda
-    private double superGrossWage; // super hrubá mzda
+//    private double superGrossWage; // super hrubá mzda
     private double downPayment; //záloha na daň
     private double shInsurancePayment; // odvody na sociální a zdravodní pojištění
     private double netWage; //čistá mzda
-    static final double ODV_ZAM = 0.34;
-    static final double DAN_VYP = 0.15;
-    static final double MAXDAN_SLEVA = 2070;
+//    static final double ODV_ZAM = 0.34;
+    static final double TAX_CALCULATED = 0.15;
+    static final double MAXTAX_DISCOUNT = 2570;
     static final double SOC = 0.065;
-    static final double ZDRAV = 0.045;
+    static final double HEALTH = 0.045;
 
     public Wage(Employee employee, int hours) {
         this.employee = employee;
@@ -49,9 +49,9 @@ public class Wage {
         return grossWage;
     }
 
-    public double getSuperGrossWage() {
-        return superGrossWage;
-    }
+//    public double getSuperGrossWage() {
+//        return superGrossWage;
+//    }
 
     public double getDownPayment() {
         return downPayment;
@@ -65,15 +65,15 @@ public class Wage {
         return netWage;
     }
 
-    public void setSuperGrossWage() {
-        double contributions = grossWage * ODV_ZAM;
-        this.superGrossWage = grossWage + contributions;
-    }
-
+//    public void setSuperGrossWage() {
+//        double contributions = grossWage * ODV_ZAM;
+//        this.superGrossWage = grossWage + contributions;
+//    }
     public void setDownPayment() {
-        double taxAdvance = DAN_VYP * superGrossWage;
-        if (taxAdvance > MAXDAN_SLEVA) {
-            this.downPayment = taxAdvance - MAXDAN_SLEVA;
+//        double taxAdvance = TAX_CALCULATED * superGrossWage;
+        double taxAdvance = TAX_CALCULATED * grossWage;
+        if (taxAdvance > MAXTAX_DISCOUNT) {
+            this.downPayment = taxAdvance - MAXTAX_DISCOUNT;
         } else {
             this.downPayment = 0;
         }
@@ -81,7 +81,7 @@ public class Wage {
 
     public void setSHInsurancePayment() {
         double sInsurance = SOC * getGrossWage();
-        double hInsurance = ZDRAV * getGrossWage();
+        double hInsurance = HEALTH * getGrossWage();
         this.shInsurancePayment = sInsurance + hInsurance;
     }
 
@@ -99,34 +99,37 @@ public class Wage {
     }
 
     /**
-     * Metoda pro výpis odpracovaných hodin a k tomu výpočet mzdy
+     * Method to extract working hours and calculated wages
      *
      * @return String
      */
+//    private String wageToString() {
+//        return String.format("%-10d%-10.2f%-10.2f%-10.2f%-10.2f%-10.2f", hours, grossWage, superGrossWage, downPayment, shInsurancePayment, netWage);
+//    }
     private String wageToString() {
-        return String.format("%-10d%-10.2f%-10.2f%-10.2f%-10.2f%-10.2f", hours, grossWage, superGrossWage, downPayment, shInsurancePayment, netWage);
+        return String.format("%-10d%-20.2f%-20.2f%-20.2f%-20.2f", hours, grossWage, downPayment, shInsurancePayment, netWage);
     }
 
     /**
-     * Metoda pro výpis zaměstnance a jeho odpracované hodiny
+     *Method to extract employee and his working hours
      *
-     * @return String zaměstnanec odpracované hodiny
+     * @return String employee + wokring hours
      */
     public String toHourString() {
         return employee.toString() + " " + String.format("%-10d", hours);
     }
 
     /**
-     * Metoda pro výpis ID a odpracovaný hodiny zaměstnance
+     * Method to extract ID and employee's working hours
      *
-     * @return String ID odpracované hodiny
+     * @return String ID + working hours
      */
     public String toIDHourString() {
         return employee.getId() + " " + String.format("%-10d", hours);
     }
 
     /**
-     * Metoda pro seřazení dle id zaměstnanců
+     * Method to sort by employee's ID
      */
     public static Comparator<Wage> idComparator = new Comparator<Wage>() {
         @Override

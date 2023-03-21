@@ -11,7 +11,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Třidá textový zapisovač, potomek zapisovače
+ * Class TextWriter, extends Writer
+ *
  * @author Václav Kurel
  */
 public class TextWriter extends Writer {
@@ -20,8 +21,8 @@ public class TextWriter extends Writer {
     public void saveResults(String resultFile, List<Wage> wages) throws IOException {
         File resultF = new File(dataDirectory,resultFile);
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(resultF, true)))) {
-            pw.println("Mzda ze dne: " + LocalDate.now());
-            pw.format("%-5s%-20s%-20s%-12s%-6s%-8s%-20s%-10s%-10s%-10s%-10s%-10s%-10s%n", "ID", "jméno", "příjmění", "narození", "země", "Kč/hod", "pozice", "hodiny", "HM", "SHM", "ZnD", "OSZ", "CM");
+            pw.println("Wage from date: " + LocalDate.now());
+            pw.format("%-5s%-20s%-20s%-15s%-15s%-15s%-20s%-10s%-20s%-20s%-20s%-20s%n", "ID", "FirstName", "LastName", "Birth", "Country", "CZK/hour", "Position", "Hours", "GrossWage", "AdvanceTax", "SocHealthI", "NetWage");
             for (Wage wage : wages) {
                 pw.println(wage.toString());
             }
@@ -30,7 +31,7 @@ public class TextWriter extends Writer {
     
 
     /**
-     * Metoda pro uložení nově přidaných zaměstnanců
+     * Method to save added employees
      * @param employeesFile
      * @param employees
      * @throws IOException
@@ -45,7 +46,7 @@ public class TextWriter extends Writer {
     }
 
     /**
-     * Metoda pro uložení nově přidaných odpracovaných hodin
+     * Method to save added working hours
      * @param wagesFile
      * @param wages
      * @throws IOException

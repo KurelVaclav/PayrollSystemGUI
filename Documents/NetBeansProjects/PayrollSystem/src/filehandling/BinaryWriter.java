@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * Class Binary Writer
  *
  * @author Václav Kurel
  */
@@ -20,7 +21,7 @@ public class BinaryWriter extends Writer {
     public void saveResults(String resultFile, List<Wage> wages) throws IOException {
         File resultF = new File(dataDirectory, resultFile);
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(resultF))) {
-            dos.writeUTF("Mzda ze dne: " + LocalDate.now().toString());
+            dos.writeUTF("Wage calculated from date: " + LocalDate.now().toString());
             for (Wage wage : wages) {
                 dos.writeInt(wage.getEmployee().getId());
                 dos.writeUTF(wage.getEmployee().getFirstName());
@@ -33,7 +34,7 @@ public class BinaryWriter extends Writer {
                 dos.writeUTF(wage.getEmployee().getTax().getPositionName());
                 dos.writeInt(wage.getHours());
                 dos.writeDouble(wage.getGrossWage());
-                dos.writeDouble(wage.getSuperGrossWage());
+//                dos.writeDouble(wage.getSuperGrossWage());
                 dos.writeDouble(wage.getDownPayment());
                 dos.writeDouble(wage.getShInsurancePayment());
                 dos.writeDouble(wage.getNetWage());
@@ -42,8 +43,7 @@ public class BinaryWriter extends Writer {
     }
 
     /**
-     * Metoda pro vytvoření souboru se zaměstnanci z dat na txt soubor a jeho
-     * načtení
+     * Method to create file with employees from .dat to .txt file and load it
      *
      * @param employeeFile
      * @throws FileNotFoundException
@@ -70,8 +70,8 @@ public class BinaryWriter extends Writer {
     }
 
     /**
-     * Metoda pro vytvoření souboru s odpracovanými hodinami z dat na txt soubor
-     * a jeho načtení
+     * Method to create file with working hours from .dat to .txt file and load
+     * it
      *
      * @param hoursFile
      * @throws FileNotFoundException

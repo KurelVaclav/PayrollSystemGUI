@@ -10,15 +10,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import utils.IllegalInputFromUser;
 import utils.PayrollInterface;
 
 /**
- * Tato třída reprezentuje UI programu, komunikuje s uživatelem a vypisuje na
- * obrazovku
+ * This class represents the UI of the program, communicates with the user and
+ * prints to the screen.
+ *
  *
  * @author Václav Kurel
  */
@@ -28,7 +27,7 @@ public class PayrollSystemUI {
     public static PayrollInterface pay;
 
     /**
-     * třída main pro spuštění celého programu
+     * class main to start UI program
      *
      * @param args the command line arguments
      */
@@ -62,7 +61,7 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda, která vypíše hlavní menu na obrazovku
+     * A static method that prints the main menu to the screen
      */
     public static void menu() {
         System.out.println("************************************************************");
@@ -75,7 +74,7 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda, která vypíše menu pro správu zaměstnanců
+     * static method that prints the employee management menu
      */
     public static void employeeMenu() {
         System.out.println("Správa seznamu zaměstnanců: ");
@@ -120,9 +119,8 @@ public class PayrollSystemUI {
         }
     }
 
-   
     /**
-     * Statická metoda pro načtení souboru se zaměstnanci
+     * Static method to load the employee file
      *
      * @throws FileNotFoundException
      * @throws IOException
@@ -131,7 +129,7 @@ public class PayrollSystemUI {
         System.out.println("Zadejte název souboru se zaměstnanci: ");
         String employeeFile = sc.next();
         File file = new File(Writer.dataDirectory, employeeFile);
-        if (file.exists()){
+        if (file.exists()) {
             pay.loadEmployees(employeeFile);
         } else {
             System.out.println("Zadaný soubor neexistuje.");
@@ -140,12 +138,12 @@ public class PayrollSystemUI {
             if (choice.toLowerCase().charAt(0) == 'a') {
                 file.createNewFile();
             }
-        }        
+        }
         System.out.println(pay.getEmployeesInfo());
     }
 
     /**
-     * Statická metoda pro přidání zaměstnance do seznamu zaměstnanců
+     * Static method to add an employee to the employee list
      *
      * @return new Employee pokud se podaří naparsovat, jinak null
      */
@@ -189,8 +187,8 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro přidání zaměstnanců a uložení nových dat do souboru
-     * se zaměstnanci
+     * Static method to add employees and save new data to the employees file
+     *
      */
     public static void addEmployeeMenu() {
         System.out.println("Zadání nových zaměstnanců: ");
@@ -222,8 +220,8 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro výpis seznamu zaměstnanců, lze seřadit dle volby
-     * uživatele
+     * Static method to print the list of employees, can be sorted according to
+     * the user's choice
      */
     public static void listOfEmployeesMenu() {
         System.out.println("Seřadit dle (vyberte možnost): ");
@@ -256,7 +254,7 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro vyhledání zamětnanců dle ID
+     * Static method for searching employees by ID
      */
     public static void searchEmployeeIDMenu() {
         boolean search = false;
@@ -283,7 +281,7 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro zadání odpracovaných hodin a výpočet mzdy
+     * Static method for entering hours worked and calculating wages
      */
     public static void wageMenu() {
         System.out.println("Mzdový portál: ");
@@ -329,7 +327,7 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro načtení souboru s odpracovanými hodinami
+     * Static method to load the hours worked file
      *
      * @throws FileNotFoundException
      */
@@ -345,9 +343,9 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro přidání odpracovaných hodin zaměstnanci
+     * Static method to add working hours to the employee
      *
-     * @return new Wage pokud se podaří naparsovat, jinak null
+     * @return new Wage if parsed successfully, else null
      */
     public static Wage addHours() {
         System.out.println("Zadejte ID: ");
@@ -367,7 +365,7 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro menu přidání odpracovaných hodin a jejich uožení
+     * Static method for adding hours worked menu and saving them
      */
     public static void addHoursMenu() {
         System.out.println("Zadání nové pracovní hodiny zaměstnanci: ");
@@ -394,7 +392,7 @@ public class PayrollSystemUI {
     }
 
     /**
-     * Statická metoda pro výpočet mzdy a uložení nových výsledků
+     * Static method to calculate wages and save new results
      */
     public static void calculateWage() {
         pay.calculateWages();

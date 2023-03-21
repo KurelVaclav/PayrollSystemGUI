@@ -12,8 +12,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * Třída Excel zapisovač
- * využívá externí knižnici POI apache
+ * Class Excel Writer. Uses external library POI apache
+ *
  * @author Václav Kurel
  */
 public class ExcelWiter extends Writer {
@@ -38,7 +38,8 @@ public class ExcelWiter extends Writer {
 
     /**
      * Metoda pro vytvoření hlavičky dat
-     * @param sheet 
+     *
+     * @param sheet
      */
     private void createHeaderRow(Sheet sheet) {
         CellStyle cs = sheet.getWorkbook().createCellStyle();
@@ -48,10 +49,10 @@ public class ExcelWiter extends Writer {
         cellID.setCellValue("ID");
         Cell cellFN = r.createCell(2);
         cellFN.setCellStyle(cs);
-        cellFN.setCellValue("Jmeno");
+        cellFN.setCellValue("FirstName");
         Cell cellLN = r.createCell(3);
         cellLN.setCellStyle(cs);
-        cellLN.setCellValue("Prijmeni");
+        cellLN.setCellValue("LastName");
         Cell cellDD = r.createCell(4);
         cellDD.setCellStyle(cs);
         cellDD.setCellValue("dd");
@@ -63,37 +64,38 @@ public class ExcelWiter extends Writer {
         cellyy.setCellValue("yyyy");
         Cell cellNation = r.createCell(7);
         cellNation.setCellStyle(cs);
-        cellNation.setCellValue("Narodnost");
+        cellNation.setCellValue("Country");
         Cell cellKcH = r.createCell(8);
         cellKcH.setCellStyle(cs);
-        cellKcH.setCellValue("Kc/hod");
+        cellKcH.setCellValue("CZK/hour");
         Cell cellPoz = r.createCell(9);
         cellPoz.setCellStyle(cs);
-        cellPoz.setCellValue("Pozice");
+        cellPoz.setCellValue("Position");
         Cell cellhod = r.createCell(10);
         cellhod.setCellStyle(cs);
-        cellhod.setCellValue("Hodiny");
+        cellhod.setCellValue("Hours");
         Cell cellHM = r.createCell(11);
         cellHM.setCellStyle(cs);
-        cellHM.setCellValue("HM");
-        Cell cellSHM = r.createCell(12);
-        cellSHM.setCellStyle(cs);
-        cellSHM.setCellValue("SHM");
-        Cell cellOdv = r.createCell(13);
+        cellHM.setCellValue("GrossWage");
+//        Cell cellSHM = r.createCell(12);
+//        cellSHM.setCellStyle(cs);
+//        cellSHM.setCellValue("SHM");
+        Cell cellOdv = r.createCell(12);
         cellOdv.setCellStyle(cs);
-        cellOdv.setCellValue("Odvody");
-        Cell cellIns = r.createCell(14);
+        cellOdv.setCellValue("AdvanceTax");
+        Cell cellIns = r.createCell(13);
         cellIns.setCellStyle(cs);
-        cellIns.setCellValue("Pojisteni");
-        Cell cellNet = r.createCell(15);
+        cellIns.setCellValue("SocHealthInsurance");
+        Cell cellNet = r.createCell(14);
         cellNet.setCellStyle(cs);
-        cellNet.setCellValue("CM");
+        cellNet.setCellValue("NetWage");
     }
 
     /**
      * Metda pro zápis do buněk excelu
+     *
      * @param wage
-     * @param row 
+     * @param row
      */
     private void writeBook(Wage wage, Row row) {
         Cell cell = row.createCell(1);
@@ -118,13 +120,13 @@ public class ExcelWiter extends Writer {
         cell.setCellValue(wage.getHours());
         cell = row.createCell(11);
         cell.setCellValue(wage.getGrossWage());
+//        cell = row.createCell(12);
+//        cell.setCellValue(wage.getSuperGrossWage());
         cell = row.createCell(12);
-        cell.setCellValue(wage.getSuperGrossWage());
-        cell = row.createCell(13);
         cell.setCellValue(wage.getDownPayment());
-        cell = row.createCell(14);
+        cell = row.createCell(13);
         cell.setCellValue(wage.getShInsurancePayment());
-        cell = row.createCell(15);
+        cell = row.createCell(14);
         cell.setCellValue(wage.getNetWage());
     }
 

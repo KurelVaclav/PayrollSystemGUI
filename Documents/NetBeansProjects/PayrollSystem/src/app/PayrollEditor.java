@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.DuplicateFormatFlagsException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -20,40 +21,41 @@ import java.util.logging.Logger;
 import javax.activation.UnsupportedDataTypeException;
 
 /**
- * Třída PayrollEditor slouží k implementaci metod z PayrollInterface Obsahuje
- * metody pro načtení, výpočet a uložení dat
+ * Class PayrollEditor used to implement methods from the PayrollInterface.
+ * Contains methods for loading, calculating and saving employee's and wage's
+ * data.
  *
  * @author Václav Kurel
  */
 public class PayrollEditor implements PayrollInterface {
-
+    
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Wage> wages = new ArrayList<>();
-         
+
     /**
-     * Metoda pro načtení zaměstnanců dle typu souboru
+     * Method for loading employees by file type
      *
-     * @param employeeFile - název souboru se zaměstnanci
-     * @throws java.io.FileNotFoundException
+     * @param employeeFile - the name of the employee file
+     * @throws IOException
      */
     @Override
-    public void loadEmployees(String employeeFile) throws /**FileNotFoundException,**/ IOException {
+    public void loadEmployees(String employeeFile) throws IOException {
         if (employeeFile.endsWith(".txt")) {
             loadEmployeesTxt(employeeFile);
         } else if (employeeFile.endsWith(".dat")) {
             loadEmployeesBinary(employeeFile);
-        } else{
-            throw new UnsupportedDataTypeException("Nepodporovaný formát");
+        } else {
+            throw new UnsupportedDataTypeException("Unsupported file format");
         }
     }
 
     /**
-     * Metoda pro načtění zaměstnanců z txt souboru
+     * Method for loading employees from .txt file
      *
      * @param employeeFile
-     * @throws FileNotFoundException
+     * @throws IOException
      */
-    public void loadEmployeesTxt(String employeeFile) throws IOException /**throws FileNotFoundException**/ {
+    public void loadEmployeesTxt(String employeeFile) throws IOException {
         File eFile = new File(Writer.dataDirectory, employeeFile);
         if (eFile.exists()) {
             try (Scanner inData = new Scanner(eFile)) {
@@ -78,7 +80,7 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro načtení zaměstnanců z dat souboru
+     * Method for loading emplyees from .dat file
      *
      * @param employeeFile
      * @throws IOException
@@ -112,19 +114,19 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro získání informace o zaměstnancích, třídí dle ID
+     * Method for obtaining information about employees
      *
-     * @return String informace o zaměstnancích
+     * @return String emplyees info
      */
     @Override
     public String getEmployeesInfo() {
         try {
             Collections.sort(employees);
         } catch (Exception e) {
-            System.err.println("nepodařilo se seřadit");
+            System.err.println("Sorting failed");
         }
         StringBuilder sb = new StringBuilder("");
-        sb.append(String.format("%-5s%-20s%-20s%-12s%-6s%-8s%-20s%n", "ID", "jméno", "příjmění", "narození", "země", "Kč/hod", "pozice"));
+        sb.append(String.format("%-5s%-20s%-20s%-15s%-15s%-15s%-20s%n", "ID", "FirstName", "LastName", "BirthDate", "Country", "CZK/hour", "Position"));
         for (Employee employee : employees) {
             sb.append(employee).append("\n");
         }
@@ -132,15 +134,15 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro získání info o zaměstnancích seřazený dle ID
+     * Method for obtaining information about employees sorted by ID
      *
-     * @return String info o změstnancích
+     * @return String employees info
      */
     @Override
     public String getEmployeesInfoSortedByID() {
         Collections.sort(employees);
         StringBuilder sb = new StringBuilder("");
-        sb.append(String.format("%-5s%-20s%-20s%-12s%-6s%-8s%-20s%n", "ID", "jméno", "příjmění", "narození", "země", "Kč/hod", "pozice"));
+        sb.append(String.format("%-5s%-20s%-20s%-15s%-15s%-15s%-20s%n", "ID", "FirstName", "LastName", "BirthDate", "Country", "CZK/hour", "Position"));
         for (Employee employee : employees) {
             sb.append(employee).append("\n");
         }
@@ -148,15 +150,15 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro získání info o zaměstnancích seřazený dle příjmení
+     * Method for obtaining information about employees sorted by last name
      *
-     * @return String info o zaměstnancích
+     * @return String employees info
      */
     @Override
     public String getEmployeesInfoSortedByLastName() {
         Collections.sort(employees, Employee.lastNameComparator);
         StringBuilder sb = new StringBuilder("");
-        sb.append(String.format("%-5s%-20s%-20s%-12s%-6s%-8s%-20s%n", "ID", "jméno", "příjmění", "narození", "země", "Kč/hod", "pozice"));
+        sb.append(String.format("%-5s%-20s%-20s%-15s%-15s%-15s%-20s%n", "ID", "FirstName", "LastName", "BirthDate", "Country", "CZK/hour", "Position"));
         for (Employee employee : employees) {
             sb.append(employee).append("\n");
         }
@@ -164,15 +166,15 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro získání info o zaměstnancích seřazený dle jména
+     * Method for obtaining information about employees sorted by first name
      *
-     * @return String info o zaměstnancích
+     * @return String employees info
      */
     @Override
     public String getEmployeesInfoSortedByFirstName() {
         Collections.sort(employees, Employee.firstNameComparator);
         StringBuilder sb = new StringBuilder("");
-        sb.append(String.format("%-5s%-20s%-20s%-12s%-6s%-8s%-20s%n", "ID", "jméno", "příjmění", "narození", "země", "Kč/hod", "pozice"));
+        sb.append(String.format("%-5s%-20s%-20s%-15s%-15s%-15s%-20s%n", "ID", "FirstName", "LastName", "BirthDate", "Country", "CZK/hour", "Position"));
         for (Employee employee : employees) {
             sb.append(employee).append("\n");
         }
@@ -180,10 +182,11 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro nalezení zaměstnance dle ID
+     * Method for finding employee by ID
      *
-     * @param id
-     * @return nalezeného Employee nebo vyjímku
+     * @param id -int
+     * @return found Employee
+     * @throws NoSuchElementException
      */
     @Override
     public Employee findEmployee(int id) {
@@ -192,25 +195,33 @@ public class PayrollEditor implements PayrollInterface {
                 return employee;
             }
         }
-        throw new NoSuchElementException("Takový zaměstnanec s ID: " + id + " není evidován!");
+        throw new NoSuchElementException("Employee with ID: " + id + " is not in list!");
     }
 
     /**
-     * Metoda pro přidání zaměstnance do listu
+     * Method for adding employee to list
      *
      * @param e - Employee
      */
     @Override
     public void addEmployeeToList(Employee e) {
-        if (e != null) {
-            employees.add(e);
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (Employee employee : employees) {
+            ids.add(employee.getId());
         }
+        boolean isduplicitID = ids.contains(e.getId());
+        if (!isduplicitID) {
+            employees.add(e);
+        } else {
+            throw new DuplicateFormatFlagsException("This ID: " + e.getId() + " already exists");
+        }
+        
     }
 
     /**
-     * Metoda pro uložení přidaného zaměstnance
+     * Method for saving added employee
      *
-     * @param employeeFile - název změstnaneckého souboru
+     * @param employeeFile - employee file name
      * @throws IOException
      */
     @Override
@@ -221,25 +232,24 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro načtení odpracovanách hodin dle typu souboru
+     * Method for loading working hours by file type
      *
-     * @param wagesFile - název souboru s odpracovanými hodinami
-     * @throws FileNotFoundException
+     * @param wagesFile - file name with working hours
      * @throws IOException
      */
     @Override
-    public void loadHours(String wagesFile) throws FileNotFoundException, IOException {
+    public void loadHours(String wagesFile) throws IOException {
         if (wagesFile.endsWith(".txt")) {
             loadHoursTxt(wagesFile);
         } else if (wagesFile.endsWith(".dat")) {
             loadHoursBinary(wagesFile);
         } else {
-            throw new UnsupportedDataTypeException("Nepodporovaný formát");
+            throw new UnsupportedDataTypeException("Unsupported file format");
         }
     }
 
     /**
-     * Metoda pro načtení odpracovaných hodin z txt souboru
+     * Method for loading working hours from .txt file
      *
      * @param wagesFile
      * @throws FileNotFoundException
@@ -259,7 +269,7 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro načtení odpracovanách hodin z dat souboru
+     * Method for loading working hours from .dat file
      *
      * @param wagesFile
      * @throws IOException
@@ -283,11 +293,11 @@ public class PayrollEditor implements PayrollInterface {
                 }
             }
         }
-
+        
     }
 
     /**
-     * Metoda pro získání informace o odpracovaných hodinách zaměstnanců
+     * Method for obtainig info about employee's working hours
      *
      * @return String
      */
@@ -295,7 +305,7 @@ public class PayrollEditor implements PayrollInterface {
     public String getHoursInfo() {
         Collections.sort(wages, Wage.idComparator);
         StringBuilder sb = new StringBuilder("");
-        sb.append(String.format("%-5s%-20s%-20s%-12s%-6s%-8s%-20s%-10s%n", "ID", "jméno", "příjmění", "narození", "země", "Kč/hod", "pozice", "hodiny"));
+        sb.append(String.format("%-5s%-20s%-20s%-15s%-15s%-15s%-20s%-10s%n", "ID", "FirstName", "LastName", "BirthDate", "Country", "CZK/hour", "Position", "Hours"));
         for (Wage wage : wages) {
             sb.append(wage.toHourString()).append("\n");
         }
@@ -303,9 +313,9 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro uložení dat o odpracovaných hodinách
+     * Method for saving added working hours
      *
-     * @param wagesFile - soubor s odpracovanými hodinami
+     * @param wagesFile - file with working hours
      * @throws IOException
      */
     @Override
@@ -316,7 +326,7 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro výpočet mezd
+     * Method for calculating wages
      */
     @Override
     public void calculateWages() {
@@ -324,7 +334,7 @@ public class PayrollEditor implements PayrollInterface {
             int hours = wage.getHours();
             Employee e = wage.getEmployee();
             wage.setGrossWage(hours, e);
-            wage.setSuperGrossWage();
+//            wage.setSuperGrossWage();
             wage.setDownPayment();
             wage.setSHInsurancePayment();
             wage.setNetWage();
@@ -332,7 +342,7 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro získání informace o zaměstnancích a jejich vypočtených mezd
+     * Method for obtaining info about employees and their calculated wages
      *
      * @return String
      */
@@ -340,7 +350,7 @@ public class PayrollEditor implements PayrollInterface {
     public String getWagesInfo() {
         Collections.sort(wages, Wage.idComparator);
         StringBuilder sb = new StringBuilder("");
-        sb.append(String.format("%-5s%-20s%-20s%-12s%-6s%-8s%-20s%-10s%-10s%-10s%-10s%-10s%-10s%n", "ID", "jméno", "příjmění", "narození", "země", "Kč/hod", "pozice", "hodiny", "HM", "SHM", "ZnD", "OSZ", "CM"));
+        sb.append(String.format("%-5s%-20s%-20s%-15s%-15s%-15s%-20s%-10s%-20s%-20s%-20s%-20s%n", "ID", "FirstName", "LastName", "BirthDate", "Country", "CZK/hour", "Position", "Hours", "GrossWage", "AdvanceTax", "SocHealthI", "NetWage"));
         for (Wage wage : wages) {
             sb.append(wage).append("\n");
         }
@@ -348,9 +358,9 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro uložení výsledků zaměstnanců s vypočtenou mzdou
+     * Method to save employee results with calculated wages
      *
-     * @param resultFile - název výsleného souboru
+     * @param resultFile - result file name
      * @throws IOException
      */
     @Override
@@ -364,14 +374,14 @@ public class PayrollEditor implements PayrollInterface {
         } else if (resultFile.endsWith(".xlsx")) {
             w = new ExcelWiter();
         } else {
-            throw new IllegalArgumentException("Taková koncovka souboru není podporována");
+            throw new IllegalArgumentException("Such a file extention format is not supported");
         }
         w.saveResults(resultFile, wages);
-
+        
     }
 
     /**
-     * Metoda pro přidání wage do listu
+     * Method to add wage to list
      *
      * @param wage
      */
@@ -383,10 +393,9 @@ public class PayrollEditor implements PayrollInterface {
     }
 
     /**
-     * Metoda pro uložení dat do Excelu
+     * Method to save data to Excel
      *
-     * @param resultFile - výsledný soubor .xlsx do kterého se mají uložit
-     * výsledky
+     * @param resultFile - result file name (.xlsx) to save the results to
      * @throws IOException
      */
     @Override
@@ -394,5 +403,5 @@ public class PayrollEditor implements PayrollInterface {
         Writer w = new ExcelWiter();
         w.saveResults(resultFile, wages);
     }
-
+    
 }
